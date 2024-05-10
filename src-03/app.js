@@ -242,10 +242,11 @@ class DatabaseService {
 const PATH = path.join(__dirname, './db.json');
 DatabaseService.init(PATH);
 
-// MIDDLEWARE
-
 // ROUTER
 const app = fastify();
+
+// MIDDLEWARE
+// Fastify comes with an internal json parser
 
 // ROUTES
 app.post('/users/register', UserController.createUser);
