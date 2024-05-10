@@ -1,43 +1,43 @@
-const express = require('express')
+const fastify = require('fastify')
 const ListService = require('./list.service')
 
 class ListController {
   static async createList(req, res) {
     try {
       const newList = await ListService.createList(req.body)
-      res.status(201).json(newList)
+      res.code(201).send(newList)
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      res.code(500).send({ message: error.message })
     }
   }
   static async retrieveList(req, res) {
     try {
       const list = await ListService.retrieveList(req.params.id)
-      if (!list) return res.status(404).json({ message: 'List not found' })
-      res.json(list)
+      if (!list) return res.code(404).send({ message: 'List not found' })
+      res.send(list)
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      res.code(500).send({ message: error.message })
     }
   }
   static async updateList(req, res) {
     try {
       const updatedList = await ListService.updateList(req.params.id, req.body)
-      res.json(updatedList)
+      res.send(updatedList)
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      res.code(500).send({ message: error.message })
     }
   }
   static async deleteList(req, res) {
     try {
       await ListService.deleteList(req.params.id)
-      res.json({ message: 'List deleted successfully' })
+      res.send({ message: 'List deleted successfully' })
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      res.code(500).send({ message: error.message })
     }
   }
 }
 
-const listRouter = express.Router()
+const listRouter = fastify()
 listRouter.post('/create', ListController.createList)
 listRouter.get('/list/:id', ListController.retrieveList)
 listRouter.put('/list/:id', ListController.updateList)

@@ -1,19 +1,28 @@
-const express = require('express')
+const fastify = require('fastify')
+const path = require('path')
 const userRouter = require('./modules/user/user.controller')
 const taskRouter = require('./modules/task/task.controller')
 const listRouter = require('./modules/list/list.controller')
 const DatabaseService = require('./modules/database/database.service')
 
+// DATABASE
+const PATH = path.join(__dirname, './db.json')
+DatabaseService.init(PATH)
+
 // ROUTER
-const app = express()
-const PORT = 3333
+const app = fastify()
 
 // MIDDLEWARE
-app.use(express.json())
+// Fastify comes with an internal json parser
+
+// ROUTES
 app.use('/users', userRouter)
 app.use('/tasks', taskRouter)
 app.use('/lists', listRouter)
 
 // SERVER
-DatabaseService.init()
-app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
+const PORT = 3333
+app.listen({ port: PORT, host: '0.0.0.0' }, (err, address) => {
+  if (err) throw err
+  console.log(`Server is running on ${address}`)
+})
