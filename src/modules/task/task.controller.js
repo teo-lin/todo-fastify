@@ -2,43 +2,43 @@ const fastify = require('fastify')
 const TaskService = require('./task.service')
 
 class TaskController {
-  static async createTask(req, res) {
+  static createTask(req, res) {
     try {
-      const newTask = await TaskService.createTask(req.body)
+      const newTask = TaskService.createTask(req.body)
       res.code(201).send(newTask)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
   }
-  static async retrieveTask(req, res) {
+  static retrieveTask(req, res) {
     try {
-      const task = await TaskService.retrieveTask(req.params.id)
+      const task = TaskService.retrieveTask(req.params.id)
       if (!task) return res.code(404).send({ message: 'Task not found' })
       res.send(task)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
   }
-  static async updateTask(req, res) {
+  static updateTask(req, res) {
     try {
-      const updatedTask = await TaskService.updateTask(req.params.id, req.body)
+      const updatedTask = TaskService.updateTask(req.params.id, req.body)
       res.send(updatedTask)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
   }
-  static async deleteTask(req, res) {
+  static deleteTask(req, res) {
     try {
-      await TaskService.deleteTask(req.params.id)
+      TaskService.deleteTask(req.params.id)
       res.send({ message: 'Task deleted successfully' })
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
   }
-  static async completeTask(req, res) {
+  static completeTask(req, res) {
     try {
       const taskId = req.params.id
-      const task = await TaskService.completeTask(taskId)
+      const task = TaskService.completeTask(taskId)
       if (!task) return res.code(404).send({ message: 'Task not found' })
       res.send(task)
     } catch (error) {
