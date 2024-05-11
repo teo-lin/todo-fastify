@@ -246,7 +246,8 @@ DatabaseService.init(PATH)
 const app = fastify()
 
 // MIDDLEWARE
-// Fastify comes with an internal json parser
+// Fastify comes with an internal json parser, no need for one
+app.all('*', (req, res) => res.status(404).send({ message: 'Route not found' }))
 
 // ROUTES
 app.post('/users/register', UserController.createUser)
