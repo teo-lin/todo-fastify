@@ -37,10 +37,10 @@ class ListController {
   }
 }
 
-const listRouter = fastify()
-listRouter.post('/create', ListController.createList)
-listRouter.get('/list/:id', ListController.retrieveList)
-listRouter.put('/list/:id', ListController.updateList)
-listRouter.delete('/list/:id', ListController.deleteList)
-
-module.exports = listRouter
+module.exports = function (fastify, options, done) {
+  fastify.post('/lists/create', ListController.createList)
+  fastify.get('/lists/list/:id', ListController.retrieveList)
+  fastify.put('/lists/list/:id', ListController.updateList)
+  fastify.delete('/lists/list/:id', ListController.deleteList)
+  done()
+}

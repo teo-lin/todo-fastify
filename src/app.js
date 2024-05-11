@@ -16,23 +16,9 @@ const app = fastify()
 // Fastify comes with an internal json parser
 
 // ROUTES
-// app.use('/users', userRouter)
-// app.use('/tasks', taskRouter)
-// app.use('/lists', listRouter)
-// app.get('/', function handler(req, res) {
-//   res.send({ hello: 'world' })
-// })
-// app.register(function (app, opts, done) {
-//   app.get('/users', userRouter)
-//   // app.route(route)
-//   done()
-// })
-const UserController = require('./modules/user/user.controller')
-
-app.post('/register', UserController.createUser)
-app.get('/user/:id', UserController.retrieveUser)
-app.put('/user/:id', UserController.updateUser)
-app.delete('/user/:id', UserController.deleteUser)
+app.register(userRouter)
+app.register(taskRouter)
+app.register(listRouter)
 
 // SERVER
 const PORT = 3333

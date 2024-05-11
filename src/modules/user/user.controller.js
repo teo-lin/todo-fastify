@@ -37,10 +37,10 @@ class UserController {
   }
 }
 
-const userRouter = fastify()
-userRouter.post('/register', UserController.createUser)
-userRouter.get('/user/:id', UserController.retrieveUser)
-userRouter.put('/user/:id', UserController.updateUser)
-userRouter.delete('/user/:id', UserController.deleteUser)
-
-module.exports = UserController
+module.exports = function (fastify, options, done) {
+  fastify.post('/users/register', UserController.createUser)
+  fastify.get('/users/user/:id', UserController.retrieveUser)
+  fastify.put('/users/user/:id', UserController.updateUser)
+  fastify.delete('/users/user/:id', UserController.deleteUser)
+  done()
+}

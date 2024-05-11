@@ -47,11 +47,11 @@ class TaskController {
   }
 }
 
-const taskRouter = fastify()
-taskRouter.post('/create', TaskController.createTask)
-taskRouter.get('/task/:id', TaskController.retrieveTask)
-taskRouter.put('/task/:id', TaskController.updateTask)
-taskRouter.delete('/task/:id', TaskController.deleteTask)
-taskRouter.patch('/task/:id/complete', TaskController.completeTask)
-
-module.exports = taskRouter
+module.exports = function (fastify, options, done) {
+  fastify.post('/tasks/create', TaskController.createTask)
+  fastify.get('/tasks/task/:id', TaskController.retrieveTask)
+  fastify.put('/tasks/task/:id', TaskController.updateTask)
+  fastify.delete('/tasks/task/:id', TaskController.deleteTask)
+  fastify.patch('/tasks/task/:id/complete', TaskController.completeTask)
+  done()
+}
