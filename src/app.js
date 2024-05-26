@@ -14,12 +14,12 @@ const app = fastify()
 
 // MIDDLEWARE
 // Fastify comes with an internal json parser, no need for one
-app.all('*', (req, res) => res.status(404).send({ message: 'Route not found' }))
+// app.all('*', (req, res) => res.status(404).send({ message: 'Route not found' }))
 
 // ROUTES
-app.register(userRouter)
-app.register(taskRouter)
-app.register(listRouter)
+app.register(userRouter, { prefix: '/api' })
+app.register(taskRouter, { prefix: '/api' })
+app.register(listRouter, { prefix: '/api' })
 
 // SERVER
 const PORT = 3000
