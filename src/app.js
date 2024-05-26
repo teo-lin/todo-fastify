@@ -22,7 +22,7 @@ app.register(taskRouter)
 app.register(listRouter)
 
 // SERVER
-const PORT = 3333
+const PORT = 3000
 app.listen({ port: PORT, host: '0.0.0.0' }, (err, address) => {
   if (err) {
     console.error(err)
