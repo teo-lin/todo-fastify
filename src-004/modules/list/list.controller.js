@@ -4,8 +4,8 @@ const ListService = require('./list.service')
 class ListController {
   static createList(req, res) {
     try {
-      const newList = ListService.createList(req.body)
-      res.code(201).send(newList)
+      const list = ListService.createList(req.body)
+      res.code(201).send(list)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
@@ -21,8 +21,8 @@ class ListController {
   }
   static updateList(req, res) {
     try {
-      const updatedList = ListService.updateList(req.params.id, req.body)
-      res.send(updatedList)
+      const list = ListService.updateList(req.params.id, req.body)
+      res.send(list)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }

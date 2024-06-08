@@ -4,11 +4,11 @@ class ListService {
   static createList(listData) {
     const data = DatabaseService.getData()
     const nextListId = `L${1 + Number(data.lastListId.slice(1))}`
-    const newList = { listId: nextListId, ...listData }
-    data.lists.push(newList)
+    const list = { listId: nextListId, ...listData }
+    data.lists.push(list)
     data.lastListId = nextListId
     DatabaseService.setData(data)
-    return newList
+    return list
   }
   static retrieveList(listId) {
     const data = DatabaseService.getData()

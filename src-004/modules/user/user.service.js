@@ -4,12 +4,12 @@ class UserService {
   static createUser(userData) {
     const data = DatabaseService.getData()
     const nextUserId = `U${1 + Number(data.lastUserId.slice(1))}`
-    const newUser = { userId: nextUserId, ...userData }
-    data.users.push(newUser)
+    const user = { userId: nextUserId, ...userData }
+    data.users.push(user)
     data.lastUserId = nextUserId
     DatabaseService.setData(data)
-    delete newUser.password
-    return newUser
+    delete user.password
+    return user
   }
   static retrieveUser(userId) {
     const data = DatabaseService.getData()

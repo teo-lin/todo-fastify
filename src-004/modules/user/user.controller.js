@@ -4,8 +4,8 @@ const UserService = require('./user.service')
 class UserController {
   static createUser(req, res) {
     try {
-      const newUser = UserService.createUser(req.body)
-      res.code(201).send(newUser)
+      const user = UserService.createUser(req.body)
+      res.code(201).send(user)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
@@ -21,8 +21,8 @@ class UserController {
   }
   static updateUser(req, res) {
     try {
-      const updatedUser = UserService.updateUser(req.params.id, req.body)
-      res.send(updatedUser)
+      const user = UserService.updateUser(req.params.id, req.body)
+      res.send(user)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }

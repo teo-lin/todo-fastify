@@ -6,8 +6,8 @@ const path = require('path')
 class UserController {
   static createUser(req, res) {
     try {
-      const newUser = UserService.createUser(req.body)
-      res.code(201).send(newUser)
+      const user = UserService.createUser(req.body)
+      res.code(201).send(user)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
@@ -23,8 +23,8 @@ class UserController {
   }
   static updateUser(req, res) {
     try {
-      const updatedUser = UserService.updateUser(req.params.id, req.body)
-      res.send(updatedUser)
+      const user = UserService.updateUser(req.params.id, req.body)
+      res.send(user)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
@@ -41,8 +41,8 @@ class UserController {
 class TaskController {
   static createTask(req, res) {
     try {
-      const newTask = TaskService.createTask(req.body)
-      res.code(201).send(newTask)
+      const task = TaskService.createTask(req.body)
+      res.code(201).send(task)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
@@ -58,8 +58,8 @@ class TaskController {
   }
   static updateTask(req, res) {
     try {
-      const updatedTask = TaskService.updateTask(req.params.id, req.body)
-      res.send(updatedTask)
+      const task = TaskService.updateTask(req.params.id, req.body)
+      res.send(task)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
@@ -86,8 +86,8 @@ class TaskController {
 class ListController {
   static createList(req, res) {
     try {
-      const newList = ListService.createList(req.body)
-      res.code(201).send(newList)
+      const list = ListService.createList(req.body)
+      res.code(201).send(list)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
@@ -103,8 +103,8 @@ class ListController {
   }
   static updateList(req, res) {
     try {
-      const updatedList = ListService.updateList(req.params.id, req.body)
-      res.send(updatedList)
+      const list = ListService.updateList(req.params.id, req.body)
+      res.send(list)
     } catch (error) {
       res.code(500).send({ message: error.message })
     }
@@ -124,12 +124,12 @@ class UserService {
   static createUser(userData) {
     const data = DatabaseService.getData()
     const nextUserId = `U${1 + Number(data.lastUserId.slice(1))}`
-    const newUser = { userId: nextUserId, ...userData }
-    data.users.push(newUser)
+    const user = { userId: nextUserId, ...userData }
+    data.users.push(user)
     data.lastUserId = nextUserId
     DatabaseService.setData(data)
-    delete newUser.password
-    return newUser
+    delete user.password
+    return user
   }
   static retrieveUser(userId) {
     const data = DatabaseService.getData()
@@ -157,11 +157,11 @@ class ListService {
   static createList(listData) {
     const data = DatabaseService.getData()
     const nextListId = `L${1 + Number(data.lastListId.slice(1))}`
-    const newList = { listId: nextListId, ...listData }
-    data.lists.push(newList)
+    const list = { listId: nextListId, ...listData }
+    data.lists.push(list)
     data.lastListId = nextListId
     DatabaseService.setData(data)
-    return newList
+    return list
   }
   static retrieveList(listId) {
     const data = DatabaseService.getData()
@@ -185,11 +185,11 @@ class TaskService {
   static createTask(taskData) {
     const data = DatabaseService.getData()
     const nextTaskId = `T${1 + Number(data.lastTaskId.slice(1))}`
-    const newTask = { taskId: nextTaskId, ...taskData }
-    data.tasks.push(newTask)
+    const task = { taskId: nextTaskId, ...taskData }
+    data.tasks.push(task)
     data.lastTaskId = nextTaskId
     DatabaseService.setData(data)
-    return newTask
+    return task
   }
   static retrieveTask(taskId) {
     const data = DatabaseService.getData()
