@@ -1,13 +1,11 @@
 const fastify = require('fastify')
-const path = require('path')
 const userRouter = require('./modules/user/user.controller')
 const taskRouter = require('./modules/task/task.controller')
 const listRouter = require('./modules/list/list.controller')
 const DatabaseService = require('./modules/database/database.service')
 
 // DATABASE
-const PATH = path.join(__dirname, './db.json')
-DatabaseService.init(PATH)
+DatabaseService.init()
 
 // ROUTER
 const app = fastify()

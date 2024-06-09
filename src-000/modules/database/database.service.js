@@ -3,7 +3,7 @@ const path = require('path')
 
 class DatabaseService {
   static #db
-  static #PATH = path.join(process.cwd(), './src/modules/database/db.json')
+  static #PATH = path.join(__dirname, './db.json')
 
   static init() {
     this.#db = JSON.parse(fs.readFileSync(this.#PATH, 'utf8'))
