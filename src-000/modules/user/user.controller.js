@@ -13,10 +13,10 @@ class UserController {
   static retrieveUser(req, res) {
     try {
       const user = UserService.retrieveUser(req.params.id)
-      if (!user) return res.code(404).send({ message: 'User not found' })
       res.send(user)
     } catch (error) {
-      res.code(500).send({ message: error.message })
+      if (error.message === 'Not Found') res.code(404).send({ message: 'User not found' })
+      else res.code(500).send({ message: error.message })
     }
   }
   static updateUser(req, res) {
@@ -24,7 +24,8 @@ class UserController {
       const user = UserService.updateUser(req.params.id, req.body)
       res.send(user)
     } catch (error) {
-      res.code(500).send({ message: error.message })
+      if (error.message === 'Not Found') res.code(404).send({ message: 'User not found' })
+      else res.code(500).send({ message: error.message })
     }
   }
   static deleteUser(req, res) {
@@ -32,7 +33,8 @@ class UserController {
       UserService.deleteUser(req.params.id)
       res.send({ message: 'User deleted successfully' })
     } catch (error) {
-      res.code(500).send({ message: error.message })
+      if (error.message === 'Not Found') res.code(404).send({ message: 'User not found' })
+      else res.code(500).send({ message: error.message })
     }
   }
 }

@@ -296,29 +296,27 @@ DatabaseService.init(PATH)
 
 // ROUTER
 const app = fastify()
-// const router = fastify.Router()
 
 // MIDDLEWARE
 // Fastify comes with an internal json parser, no need for one
-// app.all('*', (req, res) => res.status(404).send({ message: 'Route not found' }))
-app.get('/', async (req, res) => {
-  message: 'Hello World!'
-})
+const pre = '/api'
 
 // ROUTES
-app.post('/users/register', UserController.createUser)
-app.get('/users/user/:id', UserController.retrieveUser)
-app.put('/users/user/:id', UserController.updateUser)
-app.delete('/users/user/:id', UserController.deleteUser)
-app.post('/tasks/create', TaskController.createTask)
-app.get('/tasks/task/:id', TaskController.retrieveTask)
-app.put('/tasks/task/:id', TaskController.updateTask)
-app.delete('/tasks/task/:id', TaskController.deleteTask)
-app.patch('/tasks/task/:id/complete', TaskController.completeTask)
-app.post('/lists/create', ListController.createList)
-app.get('/lists/list/:id', ListController.retrieveList)
-app.put('/lists/list/:id', ListController.updateList)
-app.delete('/lists/list/:id', ListController.deleteList)
+app.post(pre + '/users/register', UserController.createUser)
+app.get(pre + '/users/user/:id', UserController.retrieveUser)
+app.put(pre + '/users/user/:id', UserController.updateUser)
+app.delete(pre + '/users/user/:id', UserController.deleteUser)
+app.post(pre + '/tasks/create', TaskController.createTask)
+app.get(pre + '/tasks/task/:id', TaskController.retrieveTask)
+app.put(pre + '/tasks/task/:id', TaskController.updateTask)
+app.delete(pre + '/tasks/task/:id', TaskController.deleteTask)
+app.patch(pre + '/tasks/task/:id/complete', TaskController.completeTask)
+app.post(pre + '/lists/create', ListController.createList)
+app.get(pre + '/lists/list/:id', ListController.retrieveList)
+app.put(pre + '/lists/list/:id', ListController.updateList)
+app.delete(pre + '/lists/list/:id', ListController.deleteList)
+// app.get(pre + '/', async (req, res) => {message: 'Hello World!'})
+// app.all('*', (req, res) => res.status(404).send({ message: 'Route not found' }))
 
 // SERVER
 const PORT = 3000

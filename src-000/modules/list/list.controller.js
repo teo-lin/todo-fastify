@@ -13,10 +13,10 @@ class ListController {
   static retrieveList(req, res) {
     try {
       const list = ListService.retrieveList(req.params.id)
-      if (!list) return res.code(404).send({ message: 'List not found' })
       res.send(list)
     } catch (error) {
-      res.code(500).send({ message: error.message })
+      if (error.message === 'Not Found') res.code(404).send({ message: 'List not found' })
+      else res.code(500).send({ message: error.message })
     }
   }
   static updateList(req, res) {
@@ -24,7 +24,8 @@ class ListController {
       const list = ListService.updateList(req.params.id, req.body)
       res.send(list)
     } catch (error) {
-      res.code(500).send({ message: error.message })
+      if (error.message === 'Not Found') res.code(404).send({ message: 'List not found' })
+      else res.code(500).send({ message: error.message })
     }
   }
   static deleteList(req, res) {
@@ -32,7 +33,8 @@ class ListController {
       ListService.deleteList(req.params.id)
       res.send({ message: 'List deleted successfully' })
     } catch (error) {
-      res.code(500).send({ message: error.message })
+      if (error.message === 'Not Found') res.code(404).send({ message: 'List not found' })
+      else res.code(500).send({ message: error.message })
     }
   }
 }

@@ -13,10 +13,10 @@ class TaskController {
   static retrieveTask(req, res) {
     try {
       const task = TaskService.retrieveTask(req.params.id)
-      if (!task) return res.code(404).send({ message: 'Task not found' })
       res.send(task)
     } catch (error) {
-      res.code(500).send({ message: error.message })
+      if (error.message === 'Not Found') res.code(404).send({ message: 'Task not found' })
+      else res.code(500).send({ message: error.message })
     }
   }
   static updateTask(req, res) {
@@ -24,7 +24,8 @@ class TaskController {
       const task = TaskService.updateTask(req.params.id, req.body)
       res.send(task)
     } catch (error) {
-      res.code(500).send({ message: error.message })
+      if (error.message === 'Not Found') res.code(404).send({ message: 'Task not found' })
+      else res.code(500).send({ message: error.message })
     }
   }
   static deleteTask(req, res) {
@@ -32,17 +33,18 @@ class TaskController {
       TaskService.deleteTask(req.params.id)
       res.send({ message: 'Task deleted successfully' })
     } catch (error) {
-      res.code(500).send({ message: error.message })
+      if (error.message === 'Not Found') res.code(404).send({ message: 'Task not found' })
+      else res.code(500).send({ message: error.message })
     }
   }
   static completeTask(req, res) {
     try {
       const taskId = req.params.id
       const task = TaskService.completeTask(taskId)
-      if (!task) return res.code(404).send({ message: 'Task not found' })
       res.send(task)
     } catch (error) {
-      res.code(500).send({ message: error.message })
+      if (error.message === 'Not Found') res.code(404).send({ message: 'Task not found' })
+      else res.code(500).send({ message: error.message })
     }
   }
 }
