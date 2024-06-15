@@ -22,10 +22,7 @@
   "scripts": {
     "dev": "nodemon src/app.ts",
     "start": "node src/app.js",
-    "start:000": "nodemon src-000/app.js",
-    "start:001": "nodemon src-001/app.js",
-    "start:002": "nodemon src-002/app.ts",
-    "start:003": "nodemon src-003/app.ts",
+    "start:000": "nodemon src/app.js",
     "start:debug": "nodemon --exec 'node --inspect -r ts-node/register' src/app.ts",
     "test": "",
     "test:watch": "",
