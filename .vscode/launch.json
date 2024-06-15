@@ -4,20 +4,11 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "nodemon:app",
+      "name": "fastify:app",
       "runtimeExecutable": "${env:HOME}/.nvm/versions/node/v20.14.0/bin/nodemon",
       "program": "${workspaceFolder}/src/app.js",
       "restart": true,
-      "console": "internalConsole",
-      "env": {
-        "NODE_ENV": "development"
-      }
-    },
-    {
-      "command": "npm start",
-      "name": "node",
-      "request": "launch",
-      "type": "node-terminal"
+      "console": "internalConsole"
     }
   ]
 }
