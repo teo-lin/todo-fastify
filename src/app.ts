@@ -4,6 +4,8 @@ import taskRouter from './modules/task/task.controller';
 import listRouter from './modules/list/list.controller';
 import DatabaseService from './modules/database/database.service';
 
+const startTime = process.hrtime();
+
 // DATABASE
 DatabaseService.init();
 
@@ -28,5 +30,7 @@ app.listen({ port: PORT, host: '127.0.0.1' }, (err, address) => {
     process.exit(1);
   }
 
-  console.log(`Server is running on ${address}`);
+  const endTime = process.hrtime(startTime);
+  const startupTime = (endTime[0] * 1000 + endTime[1] / 1000000).toFixed(3);
+  console.log(`Server started in ${startupTime} ms on ${address}`);
 });
