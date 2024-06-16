@@ -1,7 +1,6 @@
-import { Database } from '../interfaces';
-
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs'
+import path from 'path'
+import { Database } from '../interfaces'
 
 export default class DatabaseService {
   private static db: Database;
